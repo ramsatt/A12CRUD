@@ -5,6 +5,7 @@ import { CRUDRoutingModule } from './crud-routing.module';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import {AgGridModule} from "ag-grid-angular";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ProductListComponent } from './product-list/product-list.component';
   ],
   imports: [
     CommonModule,
-    CRUDRoutingModule
+    CRUDRoutingModule,
+    AgGridModule.withComponents([ProductListComponent])
   ]
 })
 export class CRUDModule { }

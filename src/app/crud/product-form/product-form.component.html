@@ -1,20 +1,65 @@
 <div class="row">
   <div class="col-6 p-5">
-    <form>
+    <form [formGroup]="productForm" (ngSubmit)="createProduct(productForm.value)">
       <div class="mb-3">
         <label for="product-name" class="form-label">Product Name</label>
-        <input type="text" class="form-control" id="product-name" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control"
+          id="product-name"
+          [ngClass]="{
+          'is-invalid': productForm.controls['name'].errors && productForm.controls['name'].touched,
+          'is-valid': !productForm.controls['name'].errors
+          }"
+        >
+        <div class="alert alert-danger" role="alert"
+             *ngIf="productForm.controls['name'].errors && productForm.controls['name'].touched">
+          <span *ngIf="productForm.controls['name'].errors?.required">Product name is required.</span>
+          <span *ngIf="productForm.controls['name'].errors?.minlength">Product name must contains 3 char length.</span>
+          <span *ngIf="productForm.controls['name'].errors?.maxlength">Product name with in 50 char length.</span>
+        </div>
       </div>
       <div class="mb-3">
-        <label for="product-desc" class="form-label">Password</label>
-        <input type="text" class="form-control" id="product-desc">
+        <label for="product-desc" class="form-label">Product Desc</label>
+        <br>
+        <textarea
+          formControlName="description"
+          class="form-control"
+          id="product-desc"
+          rows="5"
+          [ngClass]="{
+          'is-invalid': productForm.controls['description'].errors && productForm.controls['description'].touched,
+          'is-valid': !productForm.controls['description'].errors
+          }"
+        ></textarea>
+        <div class="alert alert-danger" role="alert"
+             *ngIf="productForm.controls['description'].errors && productForm.controls['description'].touched">
+          <span *ngIf="productForm.controls['description'].errors?.required">Product description is required.</span>
+          <span *ngIf="productForm.controls['description'].errors?.minlength">Product description must contains 3 char length.</span>
+          <span *ngIf="productForm.controls['description'].errors?.maxlength">Product description with in 500 char length.</span>
+        </div>
       </div>
       <div class="mb-3">
-        <label for="product-price" class="form-label">Password</label>
-        <input type="text" class="form-control" id="product-price">
+        <label for="product-price" class="form-label">Product Price</label>
+        <input
+          formControlName="price"
+          type="text"
+          class="form-control"
+          id="product-price"
+          [ngClass]="{
+          'is-invalid': productForm.controls['price'].errors && productForm.controls['price'].touched,
+          'is-valid': !productForm.controls['price'].errors
+          }"
+        >
+        <div class="alert alert-danger" role="alert"
+             *ngIf="productForm.controls['price'].errors && productForm.controls['price'].touched">
+          <span *ngIf="productForm.controls['price'].errors?.required">Product price is required.</span>
+          <span *ngIf="productForm.controls['price'].errors?.minlength">Product price must contains 1 char length.</span>
+          <span *ngIf="productForm.controls['price'].errors?.maxlength">Product price with in 8 char length.</span>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Create Product</button>
+      <button type="submit" class="btn btn-primary">{{buttonText}}</button>
     </form>
   </div>
 </div>
